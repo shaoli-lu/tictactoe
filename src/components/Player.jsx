@@ -21,12 +21,16 @@ export default function Player({
     setPlayerName(event.target.value);
   }
 
+  function handleInputFocus() {
+    setPlayerName('');
+  }
+
   let editablePlayerName = <span className="player-name">{playerName}</span>;
   // let btnCaption = 'Edit';
 
   if (isEditing) {
     editablePlayerName = (
-      <input type="text" required value={playerName} onChange={handleChange} />
+      <input type="text" required value={playerName} onChange={handleChange} onFocus={handleInputFocus} />
     );
     // btnCaption = 'Save';
   }

@@ -112,7 +112,6 @@ h1 {
   width: 10rem;
   font-size: 1rem;
   color: #e1dec7;
-  text-transform: uppercase;
   margin: 0;
   padding: 0.5rem;
   border-radius: 4px;
@@ -129,7 +128,6 @@ h1 {
   animation: pulse-text 2s infinite;
   background-color: #46432f;
   text-align: center;
-  text-transform: uppercase;
 }
 
 .player-symbol {
@@ -202,6 +200,7 @@ ol {
   align-items: center;
   background-color: rgba(40, 38, 23, 0.95);
   animation: pop-in 0.5s cubic-bezier(0.68, -0.55, 0.65, 0.52) forwards;
+  z-index: 100;
 }
 
 #game-over h2 {
@@ -222,21 +221,21 @@ ol {
   display: block;
   margin: 0 auto;
   font-size: 1.5rem;
-  background: none;
-  border: 2px solid #fcd256;
-  color: #fcd256;
-  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, #fcd256, #f8b841);
+  color: #3f3b00;
+  padding: 0.75rem 2rem;
   border-radius: 4px;
   cursor: pointer;
-  transition: all 0.2s, color 0.2s;
-  box-shadow: 0 0 8px rgba(255, 187, 0, 0.4);
+  transition: all 0.2s;
+  border: none;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 #game-over button:hover {
-  background: #fcd256;
-  color: #3f3b00;
+  background: linear-gradient(135deg, #f8b841, #fcd256);
   transform: scale(1.1);
-  box-shadow: 0 0 20px rgba(255, 187, 0, 0.8);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
 }
 
 #log {
@@ -473,5 +472,78 @@ ol {
 
   h1 {
     font-size: 2rem;
+  }
+}
+
+/* Extra small screens (iPhone mini and similar) */
+@media (max-width: 480px) {
+  #game-container {
+    padding: 1rem;
+    margin: 1rem auto;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    margin: 1rem auto 1.5rem;
+  }
+
+  #game-board button {
+    width: 5rem;
+    height: 5rem;
+    font-size: 2.5rem;
+    gap: 1rem;
+  }
+
+  #game-board ol {
+    gap: 1rem;
+  }
+
+  #game-board {
+    gap: 1rem;
+  }
+
+  #players {
+    gap: 0.5rem;
+  }
+
+  .player-name {
+    width: 8rem;
+    font-size: 0.85rem;
+  }
+
+  .player input {
+    width: 8rem;
+    font-size: 0.85rem;
+  }
+
+  .player-symbol {
+    margin-left: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  #game-over h2 {
+    font-size: 2.5rem;
+  }
+
+  #game-over p {
+    font-size: 1.2rem;
+  }
+
+  #game-over button {
+    font-size: 1.1rem;
+    padding: 0.6rem 1.5rem;
+  }
+
+  .stats-card {
+    min-width: 120px;
+    padding: 1rem;
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+  }
+
+  .stat-value {
+    font-size: 1rem;
   }
 }
