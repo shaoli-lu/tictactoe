@@ -128,6 +128,10 @@ function App() {
   return (
     <main>
       <div id="game-container">
+        <GameBoard onSelectSquare={handleSelectSquare} board={gameBoard} />
+        {(winner || hasDraw) && (
+          <GameOver winner={winner} onRestart={handleRestart} />
+        )}
         <ol id="players" className="highlight-player">
           <Player
             initialName={PLAYERS.X}
@@ -143,10 +147,6 @@ function App() {
           />
         </ol>
         <Stats stats={stats} players={players} onResetStats={handleResetStats} />
-        {(winner || hasDraw) && (
-          <GameOver winner={winner} onRestart={handleRestart} />
-        )}
-        <GameBoard onSelectSquare={handleSelectSquare} board={gameBoard} />
       </div>
       <Log turns={gameTurns} />
     </main>
