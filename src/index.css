@@ -349,3 +349,129 @@ ol {
     transform: scale(1);
   }
 }
+
+#stats-container {
+  display: flex;
+  justify-content: space-around;
+  gap: 2rem;
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(62, 59, 32, 0.6), rgba(70, 67, 47, 0.6));
+  border-radius: 8px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.stats-card {
+  background: rgba(50, 47, 20, 0.8);
+  padding: 1.5rem;
+  border-radius: 6px;
+  border: 2px solid #c3ba78;
+  min-width: 150px;
+  text-align: center;
+}
+
+.stats-card h3 {
+  margin: 0 0 1rem 0;
+  color: #f6e35a;
+  font-family: 'Roboto Slab', sans-serif;
+  font-size: 1.2rem;
+}
+
+.stats-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.75rem 0;
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+.stat-label {
+  color: #c3ba78;
+  font-weight: bold;
+}
+
+.stat-value {
+  color: #fcd256;
+  font-size: 1.2rem;
+  font-weight: bold;
+  min-width: 40px;
+}
+
+.stat-value.wins {
+  color: #6dd5ff;
+}
+
+.stat-value.losses {
+  color: #ff6b6b;
+}
+
+.stat-value.draws {
+  color: #ffd93d;
+}
+
+.reset-stats-btn {
+  background: linear-gradient(135deg, #ff6b6b, #c44545);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 0.9rem;
+  align-self: flex-end;
+}
+
+.reset-stats-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(255, 107, 107, 0.3);
+}
+
+.reset-stats-btn:active {
+  transform: translateY(0);
+}
+
+/* Hover effects for game board */
+#game-board button:hover:not(:disabled) {
+  background: #b8a894;
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+#game-board button:disabled {
+  opacity: 0.9;
+  cursor: not-allowed;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  #stats-container {
+    flex-direction: column;
+  }
+
+  .stats-card {
+    width: 100%;
+  }
+
+  #game-board button {
+    width: 6rem;
+    height: 6rem;
+    font-size: 3rem;
+  }
+
+  #players {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  #players li {
+    width: 100%;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+}

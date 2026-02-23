@@ -4,6 +4,7 @@ import Player from './components/Player.jsx';
 import GameBoard from './components/GameBoard.jsx';
 import Log from './components/Log.jsx';
 import GameOver from './components/GameOver.jsx';
+import Stats from './components/Stats.jsx';
 import { WINNING_COMBINATIONS } from './winning-combinations.js';
 
 const PLAYERS = {
@@ -16,6 +17,11 @@ const INITIAL_GAME_BOARD = [
   [null, null, null],
   [null, null, null],
 ];
+
+const INITIAL_STATS = {
+  X: { wins: 0, losses: 0, draws: 0 },
+  O: { wins: 0, losses: 0, draws: 0 }
+};
 
 function deriveActivePlayer(gameTurns) {
   let currentPlayer = 'X';
@@ -66,6 +72,7 @@ function deriveWinner(gameBoard, players) {
 function App() {
   const [players, setPlayers] = useState(PLAYERS);
   const [gameTurns, setGameTurns] = useState([]);
+  const [stats, setStats] = useState(INITIAL_STATS);
 
   const activePlayer = deriveActivePlayer(gameTurns);
   const gameBoard = deriveGameBoard(gameTurns);
@@ -86,6 +93,22 @@ function App() {
   }
 
   function handleRestart() {
+    // Update stats before restarting
+    if (winner) {
+      const winnerSymbol = winner === players.X ? 'X' : 'O';
+      const loserSymbol = winnerSymbol === 'X' ? 'O' : 'X';
+      setStats(prevStats => ({
+        ...prevStats,
+        [winnerSymbol]: { ...prevStats[winnerSymbol], wins: prevStats[winnerSymbol].wins + 1 },
+        [loserSymbol]: { ...prevStats[loserSymbol], losses: prevStats[loserSymbol].losses + 1 }
+      }));
+    } else if (hasDraw) {
+      setStats(prevStats => ({
+        X: { ...prevStats.X, draws: prevStats.X.draws + 1 },
+        O: { ...prevStats.O, draws: prevStats.O.draws + 1 }
+      }));
+    }
+
     setGameTurns([]);
   }
 
@@ -96,6 +119,10 @@ function App() {
         [symbol]: newName
       };
     });
+  }
+
+  function handleResetStats() {
+    setStats(INITIAL_STATS);
   }
 
   return (
@@ -115,6 +142,7 @@ function App() {
             onChangeName={handlePlayerNameChange}
           />
         </ol>
+        <Stats stats={stats} players={players} onResetStats={handleResetStats} />
         {(winner || hasDraw) && (
           <GameOver winner={winner} onRestart={handleRestart} />
         )}
