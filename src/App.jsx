@@ -5,6 +5,7 @@ import GameBoard from './components/GameBoard.jsx';
 import Log from './components/Log.jsx';
 import GameOver from './components/GameOver.jsx';
 import Stats from './components/Stats.jsx';
+import HelpModal from './components/HelpModal.jsx';
 import { WINNING_COMBINATIONS } from './winning-combinations.js';
 
 const PLAYERS = {
@@ -73,6 +74,7 @@ function App() {
   const [players, setPlayers] = useState(PLAYERS);
   const [gameTurns, setGameTurns] = useState([]);
   const [stats, setStats] = useState(INITIAL_STATS);
+  const [showHelp, setShowHelp] = useState(false);
 
   const activePlayer = deriveActivePlayer(gameTurns);
   const gameBoard = deriveGameBoard(gameTurns);
@@ -128,6 +130,8 @@ function App() {
   return (
     <main>
       <div id="game-container">
+        <button id="help-button" onClick={() => setShowHelp(true)}>Help</button>
+        {showHelp && <HelpModal onClose={() => setShowHelp(false)} />}
         <GameBoard onSelectSquare={handleSelectSquare} board={gameBoard} />
         {(winner || hasDraw) && (
           <GameOver winner={winner} onRestart={handleRestart} />
